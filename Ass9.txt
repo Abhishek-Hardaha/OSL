@@ -1,0 +1,112 @@
+#include <stdio.h> // 
+
+// Define the structure for a process 
+struct Process {
+    int id;             // Process ID 
+    int burstTime;      // Burst Time (CPU time required) 
+    int remainingTime;  // Remaining Burst Time 
+    int waitingTime;    // Waiting Time 
+    int turnAroundTime; // Turnaround Time 
+};
+
+// Function to find waiting time for all processes 
+void findWaitingTime(struct Process processes[], int n, int quantum) {
+    int time = 0; // Current time 
+
+    while (1) { // 
+        int done = 1; // Assume all processes are finished 
+
+        // Traverse all processes one by one 
+        for (int i = 0; i < n; i++) { // 
+            if (processes[i].remainingTime > 0) { // 
+                done = 0; // There is a pending process 
+
+                if (processes[i].remainingTime > quantum) { // 
+                    // Increment time by quantum 
+                    time += quantum;
+                    // Decrease remaining time by quantum 
+                    processes[i].remainingTime -= quantum;
+                } else {
+                    // Increment time by remaining time 
+                    time += processes[i].remainingTime;
+                    // Calculate waiting time 
+                    processes[i].waitingTime = time - processes[i].burstTime;
+                    // Process is finished 
+                    processes[i].remainingTime = 0;
+                }
+            }
+        }
+
+        // If all processes are done, break the loop 
+        if (done == 1) // 
+            break; // 
+    }
+}
+
+// Function to find turnaround time for all processes 
+void findTurnAroundTime(struct Process processes[], int n) {
+    for (int i = 0; i < n; i++) { // 
+        // turnAroundTime = burstTime + waitingTime 
+        processes[i].turnAroundTime = processes[i].burstTime + processes[i].waitingTime;
+    }
+}
+
+// Function to calculate and display average times 
+void findAvgTime(struct Process processes[], int n, int quantum) {
+    int totalWaitingTime = 0; // 
+    int totalTurnAroundTime = 0; // 
+
+    // Calculate waiting time for all processes 
+    findWaitingTime(processes, n, quantum);
+    // Calculate turnaround time for all processes 
+    findTurnAroundTime(processes, n);
+
+    // Display process details 
+    printf("Process\tBurst Time\tWaiting Time\tTurnaround Time\n");
+
+    // Calculate total times and display individual process data 
+    for (int i = 0; i < n; i++) {
+        totalWaitingTime += processes[i].waitingTime; // 
+        totalTurnAroundTime += processes[i].turnAroundTime; // 
+        printf("%d\t\t%d\t\t%d\t\t%d\n", processes[i].id, processes[i].burstTime, // 
+               processes[i].waitingTime, processes[i].turnAroundTime);
+    }
+
+    // Display average times 
+    printf("\nAverage Waiting Time = %.2f\n", (float)totalWaitingTime / n); // 
+    printf("Average Turnaround Time = %.2f\n", (float)totalTurnAroundTime / n); // 
+}
+
+// Main function 
+int main() {
+    int n, quantum; // 
+
+    // Input number of processes 
+    printf("Enter the number of processes: ");
+    scanf("%d", &n); // 
+
+    struct Process processes[n]; // 
+
+    // Input process attributes 
+    for (int i = 0; i < n; i++) {
+        processes[i].id = i + 1; // 
+        printf("Enter burst time for process %d: ", i + 1); // 
+        scanf("%d", &processes[i].burstTime); // 
+
+        // Initialize remaining time 
+        processes[i].remainingTime = processes[i].burstTime;
+        // Initialize other attributes 
+        processes[i].waitingTime = 0;
+        processes[i].turnAroundTime = 0;
+    }
+
+    // Input time quantum 
+    printf("Enter the time quantum: ");
+    scanf("%d", &quantum); // 
+
+    printf("\nRound Robin Scheduling Algorithm:\n"); // 
+    // Calculate and display results 
+    findAvgTime(processes, n, quantum);
+
+    return 0; // 
+}
