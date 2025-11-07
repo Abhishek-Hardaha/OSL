@@ -1,0 +1,74 @@
+#!/bin/bash
+echo "Enter the arithmetic operation (+, -, *, /):"
+read operation
+echo "Enter the first number:"
+read num1
+echo "Enter the second number:"
+read num2
+if [ "$operation" = "+" ]; then
+result=$((num1+num2))
+echo "The sum is: $result"
+elif [ "$operation" = "-" ]; then
+result=$((num1-num2))
+echo "The difference is: $result"
+elif [ "$operation" = "*" ]; then
+result=$((num1*num2))
+echo "The product is: $result"
+elif [ "$operation" = "/" ]; then
+if [ "$num2" -eq 0 ]; then
+echo "Error: Division by zero is not allowed."
+else
+result=$((num1 / num2))
+echo "The quotient is: $result"
+fi
+else
+echo "Invalid operation. Please enter one of +, -, *, /."
+fi
+
+
+------------------------------------------------------------
+
+#include <stdio.h>
+int main()
+{
+char operation;
+double num1, num2, result;
+printf("Enter the arithmetic operation (+, -, *, /): ");
+scanf("%c", &operation);
+printf("Enter the first number: ");
+scanf("%lf", &num1);
+printf("Enter the second number: ");
+scanf("%lf", &num2);
+if (operation == '+')
+{
+result = num1 + num2;
+printf("The sum is: %.2f\n", result);
+}
+else if (operation == '-')
+{
+result = num1 - num2;
+printf("The difference is: %.2f\n", result);
+}
+else if (operation == '*')
+{
+result = num1 * num2;
+printf("The product is: %.2f\n", result);
+}
+else if (operation == '/')
+{
+if (num2 == 0)
+{
+printf("Error: Division by zero is not allowed.\n");
+}
+else
+{
+result = num1 / num2;
+printf("The quotient is: %.2f\n", result);
+}
+}
+else
+{
+printf("Invalid operation. Please enter one of +, -, *, /.\n");
+}
+return 0;
+}
