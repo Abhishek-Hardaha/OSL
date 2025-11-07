@@ -1,0 +1,49 @@
+Here is a plain text summary of the provided document.
+
+The document outlines Experiment 1, which involves exploring the Fedora/Ubuntu desktop environment and terminal.
+The goal is to perform basic tasks like navigating the file system, managing files and directories, and understanding the Linux file structure.
+
+It begins by defining software as programs that instruct a computer.
+Software is divided into Application Software (interfacing with the user, e.g., Word, web browsers) and System Software (interfacing with hardware, e.g., operating systems, compilers).
+An Operating System (OS) is presented as the best example of system software, acting as an interface between the user and the computer hardware to manage all resources.
+
+The document lists important functions of an OS, including:
+Memory Management: Tracking and allocating primary memory.
+Processor Management: Allocating the CPU to processes.
+Device Management: Managing device access via an I/O controller.
+File Management: Tracking file information, location, and status.
+Security: Preventing unauthorized access.
+Other functions: Controlling system performance, job accounting, error detection, and coordinating software for users.
+
+The document highlights "Why LINUX?" by stating it is the foundation for many servers and supercomputers, which are used for tasks like weather prediction and atomic research.
+It also notes Linux's relevance in IT job roles.
+
+When comparing Linux to Windows, the document states Linux is open-source, allowing developers to access and customize its source code.
+It is also described as offering greater security, high stability, and giving users full control over software updates, which are often faster to install.
+
+A comparison table for Unix vs. Linux is provided. Key differences noted are:
+Unix (1970) is proprietary, non-portable, CUI-based, and high-cost.
+Linux (1991) is open-source, portable, GUI-based, and low-cost.
+
+The document then describes the two main ways to interact with Ubuntu:
+1. Ubuntu Desktop Environment: This is the graphical user interface (GUI) that includes visual elements like windows, menus, and icons. It provides Windows-equivalent applications like LibreOffice for MS Office and System Settings for Control Panel.
+2. Ubuntu Terminal: This is the command-line interface (CLI) or shell, a text-based interface. Its key features are command execution for system management and script execution for automation.
+
+Basic tasks in the terminal are broken down into three categories:
+1. Navigating the file system: Key commands include `pwd` (shows current location), `ls` (lists files), `cd` (changes directory), `cd ~` (goes to home), and `cd ..` (goes down one level).
+2. Managing files and directories: Commands include `touch` (creates an empty file), `mkdir` (creates a folder), `rm` (removes a file), `rmdir` (removes a folder), `rm -r` (removes a directory and its contents), `cp` (copies a file), `cp -r` (copies a directory), and `my` (moving and renaming files/directories).
+3. Understanding the Linux file structure: The file system is a hierarchical, tree-like structure starting from the root directory (`/`). The document provides a diagram and tables detailing the purpose of key directories, such as:
+`/bin`: Essential user command binaries.
+`/boot`: Static files for the boot loader.
+`/dev`: Device files.
+`/etc`: Host-specific system configuration files.
+`/home`: User home directories.
+`/lib`: Shared libraries.
+`/media`: Mount points for removable media.
+`/mnt`: Used for mounted filesystems.
+`/opt`: Add-on application software packages.
+`/sbin`: Essential system binaries, used by the superuser.
+`/tmp`: Temporary files.
+`/usr`: User utilities and applications.
+`/var`: Variable data files, such as logs.
+`/proc`: A virtual filesystem with process information.
