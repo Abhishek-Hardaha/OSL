@@ -1,0 +1,71 @@
+Here is the plain text summary of the document.
+
+This document outlines Experiment 2, which focuses on executing essential Ubuntu shell commands for file manipulation and viewing file content.
+
+First, there are pre-requisite steps to set up the exercise:
+Create a directory of your name (e.g., mkdir DKB).
+Change into that new directory (e.g., cd DKB).
+Create an empty file named fruits.txt (e.g., touch fruits.txt).
+Add 7 fruit names into the file, each on a new line (e.g., using the echo -e command with a list of fruits).
+
+The document then lists 20 tasks to be performed on the fruits.txt file, along with the corresponding shell commands for each. These tasks are:
+
+1. View the Contents of the File
+using cat fruits.txt
+
+2. Count the Number of Lines
+using wc -l fruits.txt
+
+3. Display the First Few Lines
+using head-n 3 fruits.txt
+
+4. Display the Last Few Lines
+using tail -n 3 fruits.txt
+
+5. Search for a Specific Pattern
+using grep 'berry' fruits.txt
+
+6. Delete Lines Containing a Specific Pattern
+using sed '/banana/d' fruits.txt > modified_fruits.txt
+
+7. Insert a Line at a Specific Position
+using sed '3i grape' fruits.txt > modified_fruits.txt
+
+8. Replace a Specific Pattern
+using sed 's/banana/mango/' fruits.txt > modified_fruits.txt
+
+9. Append Text to the End of the File
+using echo "grapes" >> fruits.txt
+
+10. Sort the Contents of the File
+using sort fruits.txt > sorted_fruits.txt
+
+11. Display Line Numbers
+using nl fruits.txt
+
+12. Reverse the Order of Lines
+using tac fruits.txt
+
+13. Display Lines Matching a Specific Pattern
+using grep 'a' fruits.txt
+
+14. Count Words in the File
+using wc-w fruits.txt
+
+15. Display Lines Within a Range
+using sed -n '3,5p' fruits.txt
+
+16. Remove Duplicate Lines
+using sort fruits.txt / uniq > modified_fruits.txt
+
+17. Check for a Specific Word and Display its Line Number
+using grep -n 'watermelon' fruits.txt
+
+18. Calculate the Length of Each Line
+using awk '{ print length, $0}' fruits.txt
+
+19. Check if a File Contains a Specific Word
+using grep -q 'banana' fruits.txt && echo "Found" // echo "Not Found"
+
+20. Create a Backup of a File
+using cp fruits.txt backup_fruits.txt

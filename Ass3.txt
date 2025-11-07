@@ -1,0 +1,66 @@
+Here is the plain text summary of the document.
+
+This document describes Experiment 3, which involves using advanced shell commands and utilities to perform complex file searches, data processing, and manipulation.
+
+The first part covers advanced shell commands for complex file searches.
+A table explains various options for the `find` command:
+-name pattern: Searches for files with a specific name or pattern.
+-type type: Specifies the file type (e.g., f for regular files, d for directories).
+-size +/-n: Searches for files based on size (+n for larger, -n for smaller).
+-mtime n: Finds files based on modification time in days (n).
+-print: Displays the path names of matching files.
+-maxdepth levels: Restricts the search to a specified directory depth.
+-mindepth levels: Specifies the minimum directory depth for the search.
+-empty: Finds empty files and directories.
+-delete: Deletes files that match the criteria.
+
+Examples are provided for these search commands:
+Command 1: Finding Files by Name (e.g., find /home/student/DKB-name "data.csv")
+Command 2: Finding Directories (e.g., find /home/student-type d) or files (e.g., find /home/student-type f)
+Command 3: Finding Files by Size (e.g., find /home/student/DKB-type f-size +50M)
+Command 4: Finding Files by Modification Time (e.g., find /home/student-type f-mtime 10)
+Command 5: Printing File Paths (e.g., find/home/student/DKB -name "*.pdf" -print)
+Command 6: Limiting Search Depth (e.g., find /home/student/DKB-maxdepth 2 -type f-name "*.jpg")
+Command 7: Specifying Minimum Search Depth (e.g., find /home/student/DKB-mindepth 2 -type f-name "*.jpg")
+Command 8: Finding Empty Files and Directories (e.g., find /home/student/DKB-empty)
+Command 9: Deleting files (e.g., find /home/student/DKB-type f-empty-delete)
+
+The second part of the document covers data processing and manipulation.
+It requires setting up a directory (e.g., mkdir DKB) and creating a `data.csv` file.
+Two methods for creating and populating the file are shown.
+Method 1 uses `touch` or `printf` to create the file and `printf` with `>>` to append 10 entries (e.g., "Alice, 30, Engineer").
+Method 2 uses the `nano` text editor (e.g., nano data.csv) to add content and then save (Ctrl+O) and exit (Ctrl+X).
+
+A list of 10 tasks to be performed on the `data.csv` file is given:
+1. Displaying the File Contents
+2. Selecting Specific Columns
+3. Extracting Specific Rows
+4. Filtering Rows Based on a Condition
+5. Sorting Data
+6. Counting the Number of Rows
+7. Finding Unique Values in a Column
+8. Counting the Number of Unique Values in a Column
+9. Replacing a Value in a Specific Column
+10. Calculating the Average Value of a Column
+
+Finally, the commands for each task are provided:
+1. Displaying the File Contents
+cat data.csv
+2. Selecting Specific Columns
+cut -d',' -f 1,3 data.csv
+3. Extracting Specific Rows
+sed -n '2,4p' data.csv
+4. Filtering Rows Based on a Condition
+awk -F, '$2>30' data.csv
+5. Sorting Data
+sort -t',' -k 2,2n data.csv
+6. Counting the Number of Rows
+wc -l data.csv
+7. Finding Unique Values in a Column
+cut -d',' -f 3 data.csv | sort | uniq
+8. Counting the Number of Unique Values in a Column
+cut -d',' -f 3 data.csv | sort | uniq | wc -l
+9. Replacing a Value in a Specific Column
+sed 's/Engineer/Software Engineer/' data.csv > updated_data.csv
+10. Calculating the Average Value of a Column
+awk -F, '{sum+=$2; count+=1} END {print "Average Age:", sum/count}' data.csv
