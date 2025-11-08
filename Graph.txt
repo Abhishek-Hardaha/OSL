@@ -1,0 +1,143 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Graph {
+    int numVertices;
+    struct Node** adjList;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Graph* createGraph(int vertices) {
+    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+    graph->numVertices = vertices;
+    graph->adjList = (struct Node**)malloc(vertices * sizeof(struct Node*));
+    for (int i = 0; i < vertices; i++)
+        graph->adjList[i] = NULL;
+    return graph;
+}
+
+void insertEdge(struct Graph* graph, int src, int dest) {
+    if (src >= graph->numVertices || dest >= graph->numVertices || src < 0 || dest < 0) {
+        printf("Invalid vertices!\n");
+        return;
+    }
+    struct Node* newNode = createNode(dest);
+    newNode->next = graph->adjList[src];
+    graph->adjList[src] = newNode;
+
+    newNode = createNode(src);
+    newNode->next = graph->adjList[dest];
+    graph->adjList[dest] = newNode;
+
+    printf("Edge added between %d and %d.\n", src, dest);
+}
+
+void insertNode(struct Graph** graphRef) {
+    struct Graph* graph = *graphRef;
+    graph->numVertices++;
+    graph->adjList = (struct Node**)realloc(graph->adjList, graph->numVertices * sizeof(struct Node*));
+    graph->adjList[graph->numVertices - 1] = NULL;
+    printf("Node %d added successfully.\n", graph->numVertices - 1);
+}
+
+void deleteNode(struct Graph* graph, int node) {
+    if (node < 0 || node >= graph->numVertices) {
+        printf("Invalid node!\n");
+        return;
+    }
+    for (int i = 0; i < graph->numVertices; i++) {
+        struct Node* temp = graph->adjList[i];
+        struct Node* prev = NULL;
+        while (temp) {
+            if (temp->data == node) {
+                if (prev) prev->next = temp->next;
+                else graph->adjList[i] = temp->next;
+                free(temp);
+                break;
+            }
+            prev = temp;
+            temp = temp->next;
+        }
+    }
+    struct Node* temp = graph->adjList[node];
+    while (temp) {
+        struct Node* toFree = temp;
+        temp = temp->next;
+        free(toFree);
+    }
+    for (int i = node; i < graph->numVertices - 1; i++)
+        graph->adjList[i] = graph->adjList[i + 1];
+    graph->numVertices--;
+    graph->adjList = (struct Node**)realloc(graph->adjList, graph->numVertices * sizeof(struct Node*));
+    printf("Node %d deleted.\n", node);
+}
+
+void displayGraph(struct Graph* graph) {
+    printf("\nGraph (Adjacency List):\n");
+    for (int i = 0; i < graph->numVertices; i++) {
+        struct Node* temp = graph->adjList[i];
+        printf("%d -> ", i);
+        if (!temp) {
+            printf("NULL");
+        } else {
+            while (temp) {
+                printf("%d", temp->data);
+                temp = temp->next;
+                if (temp) printf(" -> ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int n, choice, src, dest, node;
+    printf("Enter initial number of nodes: ");
+    scanf("%d", &n);
+    struct Graph* graph = createGraph(n);
+    do {
+        printf("\n--- GRAPH MENU ---\n");
+        printf("1. Insert Edge\n");
+        printf("2. Insert Node\n");
+        printf("3. Delete Node\n");
+        printf("4. Display Graph\n");
+        printf("5. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter source and destination: ");
+                scanf("%d %d", &src, &dest);
+                insertEdge(graph, src, dest);
+                break;
+            case 2:
+                insertNode(&graph);
+                break;
+            case 3:
+                printf("Enter node to delete: ");
+                scanf("%d", &node);
+                deleteNode(graph, node);
+                break;
+            case 4:
+                displayGraph(graph);
+                break;
+            case 5:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice!\n");
+        }
+    } while (choice != 5);
+    return 0;
+}
